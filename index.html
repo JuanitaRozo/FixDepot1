@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FixDepot - Inicio</title>
   <link rel="stylesheet" href="styles/style.css">
 </head>
@@ -9,19 +10,44 @@
   <header>
     <h1>FixDepot</h1>
     <nav>
-      <ul>
-        <li><a href="pages/login.html">Iniciar Sesión</a></li>
-        <li><a href="pages/register.html">Registrarse</a></li>
-        <li><a href="pages/catalog.html">Catálogo</a></li>
-        <li><a href="pages/cart.html">Carrito</a></li>
-      </ul>
+      <a href="pages/login.html">Iniciar Sesión</a>
+      <a href="pages/register.html">Registrarse</a>
+      <a href="pages/catalog.html">Catálogo</a>
+      <a href="pages/cart.html">Carrito</a>
     </nav>
   </header>
-  <main>
-    <section id="recommendation-container">
-      <h2>Recomendaciones</h2>
-    </section>
+
+  <main class="product-grid">
+    <div class="product-card">
+      <img src="assets/cemento.jpg" alt="Cemento Portland">
+      <h3>Cemento Portland</h3>
+      <p>$12.00 por bolsa</p>
+      <button onclick="addToCart('cemento')">Agregar al carrito</button>
+    </div>
+    <div class="product-card">
+      <img src="assets/ladrillo.jpg" alt="Ladrillo Hueco">
+      <h3>Ladrillo Hueco</h3>
+      <p>$0.50 por unidad</p>
+      <button onclick="addToCart('ladrillo')">Agregar al carrito</button>
+    </div>
+    <div class="product-card">
+      <img src="assets/arena.jpg" alt="Arena Fina">
+      <h3>Arena Fina (m3)</h3>
+      <p>$25.00 por m³</p>
+      <button onclick="addToCart('arena')">Agregar al carrito</button>
+    </div>
+    <div class="product-card">
+      <img src="assets/pintura.jpg" alt="Pintura Blanca">
+      <h3>Pintura Blanca 4L</h3>
+      <p>$15.00</p>
+      <button onclick="addToCart('pintura')">Agregar al carrito</button>
+    </div>
   </main>
-  <script src="scripts/main.js"></script>
+
+  <footer>
+    <p>&copy; 2025 FixDepot. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="scripts/catalog.js"></script>
 </body>
 </html>
