@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>FixDepot - Registro</title>
+  <title>FixDepot - Recuperar Contraseña</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -36,12 +36,10 @@
   </style>
 </head>
 <body>
-  <form id="registerForm">
-    <h2>Crear Cuenta</h2>
-    <input type="text" id="name" placeholder="Nombre completo" required />
+  <form id="forgotForm">
+    <h2>Recuperar Contraseña</h2>
     <input type="email" id="email" placeholder="Correo electrónico" required />
-    <input type="password" id="password" placeholder="Contraseña" required />
-    <button type="submit">Registrarse</button>
+    <button type="submit">Enviar enlace de recuperación</button>
   </form>
 
   <!-- Firebase SDKs -->
@@ -62,14 +60,13 @@
 
     const auth = firebase.auth();
 
-    document.getElementById("registerForm").addEventListener("submit", function(e) {
+    document.getElementById("forgotForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
 
-      auth.createUserWithEmailAndPassword(email, password)
+      auth.sendPasswordResetEmail(email)
         .then(() => {
-          alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
+          alert("Enlace de recuperación enviado al correo.");
           window.location.href = "login.html";
         })
         .catch(error => {
