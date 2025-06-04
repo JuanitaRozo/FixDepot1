@@ -1,0 +1,29 @@
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #ff6600;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #fff8f0;
+}
+
+button {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
