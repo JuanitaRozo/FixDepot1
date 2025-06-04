@@ -1,0 +1,80 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Juan Pérez",
+      "email": "juan@example.com",
+      "role": "cliente",
+      "password": "hashed_password"
+    },
+    {
+      "id": 2,
+      "name": "ConstruMAX",
+      "email": "proveedor@construmax.com",
+      "role": "proveedor",
+      "company": "ConstruMAX S.A.",
+      "password": "hashed_password"
+    },
+    {
+      "id": 3,
+      "name": "Carlos Herrera",
+      "email": "carlos@obras.com",
+      "role": "trabajador",
+      "job": "Albañil",
+      "password": "hashed_password"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Cemento Portland",
+      "price": 12.0,
+      "stock": 100,
+      "description": "Bolsa de 42.5kg ideal para construcción general.",
+      "image": "https://via.placeholder.com/150?text=Cemento"
+    },
+    {
+      "id": 2,
+      "name": "Ladrillo Hueco",
+      "price": 0.5,
+      "stock": 1000,
+      "description": "Ladrillo de cerámica hueco 18x18x33cm.",
+      "image": "https://via.placeholder.com/150?text=Ladrillo"
+    },
+    {
+      "id": 3,
+      "name": "Arena Fina (m³)",
+      "price": 25.0,
+      "stock": 50,
+      "description": "Arena limpia para mezclas de mortero.",
+      "image": "https://via.placeholder.com/150?text=Arena"
+    },
+    {
+      "id": 4,
+      "name": "Pintura Blanca 4L",
+      "price": 15.0,
+      "stock": 200,
+      "description": "Pintura blanca para interiores y exteriores.",
+      "image": "https://via.placeholder.com/150?text=Pintura"
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 1,
+      "quantity": 5,
+      "total": 60.0,
+      "date": "2025-06-01"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "productId": 1,
+      "userId": 1,
+      "comment": "Muy buen producto, resistente.",
+      "rating": 5
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+1. Abre una terminal en la carpeta FixDepot
+2. Ejecuta: git init
+3. Crea un repositorio en GitHub
+4. Conecta con:
+   git remote add origin https://github.com/JuanitaRozo/FixDepot1.git
+5. Agrega archivos: git add .
+6. Primer commit: git commit -m "Proyecto inicial de FixDepot"
+7. Sube al repo: git push -u origin main
