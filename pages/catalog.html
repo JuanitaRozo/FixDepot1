@@ -1,24 +1,83 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo - FixDepot</title>
-  <link rel="stylesheet" href="../styles/style.css">
-  <script defer src="../scripts/catalog.js"></script>
-</head>
-<body>
-  <header>
-    <h1>Catálogo de Materiales</h1>
-  </header>
+// scripts/catalog.js
 
-  <main>
-    <input type="text" id="searchBar" placeholder="Buscar productos...">
-    <section id="product-list"></section>
-  </main>
+document.addEventListener("DOMContentLoaded", () => {
+  const productList = document.getElementById("product-list");
+  const searchInput = document.getElementById("search");
 
-  <footer>
-    <p style="text-align:center; padding: 1rem;">&copy; 2025 FixDepot</p>
-  </footer>
-</body>
-</html>
+  // Cargar productos desde db.json
+  fetch("../data/db.json")
+    .then(res => res.json())
+    .then(data => {
+      const products = data.products;
+
+      function renderProducts(filteredProducts = products) {
+        productList.innerHTML = "";
+
+        filteredProducts.forEach(product => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <strong>$${product.price.toFixed(2)}</strong><br>
+            <button class="add-to-cart" data-id="${product.id}">Agregar al carrito</button>
+          `;
+          productList.appendChild(card);
+        });
+
+        // Asignar eventos a botones de agregar al carrito
+        document.querySelectorAll(".add-to-cart").forEach(button => {
+          button.addEventListener("click", () => {
+            const id = parseInt(button.getAttribute("data-id"));
+            addToCart(id);
+          });
+        });
+      }
+
+      // Filtro de búsqueda
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        const filtered = products.filter(p =>
+          p.name.toLowerCase().includes(query) || p.description.toLowerCase().includes(query)
+        );
+        renderProducts(filtered);
+      });
+
+      // Mostrar productos inicialmente
+      renderProducts();
+    })
+    .catch(err => {
+      productList.innerHTML = "<p>Error al cargar productos.</p>";
+      console.error("Error cargando productos:", err);
+    });
+});
+
+// Agregar producto al carrito y guardar en Netlify Function
+function addToCart(productId) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const index = cart.findIndex(item => item.id === productId);
+
+  if (index !== -1) {
+    cart[index].quantity += 1;
+  } else {
+    cart.push({ id: productId, quantity: 1 });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Enviar carrito actualizado a Netlify Function
+  fetch('/.netlify/functions/saveCart', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cart })
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Carrito guardado:", data);
+      alert("Producto agregado al carrito y guardado.");
+    })
+    .catch(error => {
+      console.error("Error al guardar el carrito en Netlify:", error);
+    });
+}
