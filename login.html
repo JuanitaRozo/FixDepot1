@@ -36,48 +36,28 @@
     }
   </style>
 </head>
-<body>
-  <form id="loginForm">
-    <h2>Iniciar Sesión</h2>
-    <input type="email" id="email" placeholder="Correo electrónico" required />
-    <input type="password" id="password" placeholder="Contraseña" required />
-    <button type="submit">Entrar</button>
-    <a href="forgot.html">¿Olvidaste tu contraseña?</a>
-  </form>
+<form id="loginForm">
+  <input type="email" id="email" placeholder="Correo electrónico" required />
+  <input type="password" id="pass" placeholder="Contraseña" required />
+  <button type="submit">Entrar</button>
+</form>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-  <script>
-    // 🔧 TU CONFIGURACIÓN DE FIREBASE AQUÍ:
-    const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_DOMINIO.firebaseapp.com",
-      projectId: "fixdepot",
-      storageBucket: "fixdepot.appspot.com",
-      messagingSenderId: "XXXXXXX",
-      appId: "TU_APP_ID"
-    };
+  const app  = initializeApp({ /* tu config */ });
+  const auth = getAuth(app);
 
-    firebase.initializeApp(firebaseConfig);
-
-    const auth = firebase.auth();
-
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-          alert("Inicio de sesión exitoso");
-          window.location.href = "catalog.html";
-        })
-        .catch(error => {
-          alert("Error: " + error.message);
-        });
-    });
-  </script>
-</body>
-</html>
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const pass  = document.getElementById("pass").value;
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+      window.location.href = "catalog.html";
+    } catch (err) {
+      alert("Error: " + err.message);
+    }
+  });
+</script>

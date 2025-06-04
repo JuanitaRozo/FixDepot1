@@ -43,28 +43,19 @@
     }
   </style>
 </head>
-<body>
-  <header>
-    <h1>FixDepot</h1>
-  </header>
+<ul id="listaProductos"></ul>
 
-  <h2>Catálogo de Productos</h2>
-  <section class="products">
-    <div class="product">
-      <h3>Cemento Portland</h3>
-      <p>$80000</p>
-      <a href="product-detail.html">Ver más</a>
-    </div>
-    <div class="product">
-      <h3>Ladrillos Huecos</h3>
-      <p>$8500</p>
-      <a href="product-detail.html">Ver más</a>
-    </div>
-    <!-- Agrega más productos aquí -->
-  </section>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  <footer>
-    &copy; 2025 FixDepot
-  </footer>
-</body>
-</html>
+  const app = initializeApp({ /* tu config */ });
+  const db  = getFirestore(app);
+
+  const ul = document.getElementById("listaProductos");
+  const snap = await getDocs(collection(db, "productos"));
+  snap.forEach(docSnap => {
+    const p = docSnap.data();
+    ul.innerHTML += `<li>${p.nombre} – $${p.precio}</li>`;
+  });
+</script>

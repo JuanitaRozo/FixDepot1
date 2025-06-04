@@ -35,44 +35,27 @@
     }
   </style>
 </head>
-<body>
-  <form id="forgotForm">
-    <h2>Recuperar Contraseña</h2>
-    <input type="email" id="email" placeholder="Correo electrónico" required />
-    <button type="submit">Enviar enlace de recuperación</button>
-  </form>
+<form id="forgotForm">
+  <input type="email" id="email" placeholder="Correo electrónico" required />
+  <button type="submit">Enviar enlace</button>
+</form>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_DOMINIO.firebaseapp.com",
-      projectId: "fixdepot",
-      storageBucket: "fixdepot.appspot.com",
-      messagingSenderId: "XXXXXXX",
-      appId: "TU_APP_ID"
-    };
+  const app  = initializeApp({ /* tu config */ });
+  const auth = getAuth(app);
 
-    firebase.initializeApp(firebaseConfig);
-
-    const auth = firebase.auth();
-
-    document.getElementById("forgotForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
-
-      auth.sendPasswordResetEmail(email)
-        .then(() => {
-          alert("Enlace de recuperación enviado al correo.");
-          window.location.href = "login.html";
-        })
-        .catch(error => {
-          alert("Error: " + error.message);
-        });
-    });
-  </script>
-</body>
-</html>
+  document.getElementById("forgotForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Correo enviado. Revisa tu bandeja de entrada.");
+      window.location.href = "login.html";
+    } catch (err) {
+      alert("Error: " + err.message);
+    }
+  });
+</script>

@@ -34,47 +34,61 @@
       font-weight: bold;
     }
   </style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>FixDepot - Registro</title>
 </head>
 <body>
   <form id="registerForm">
-    <h2>Crear Cuenta</h2>
-    <input type="text" id="name" placeholder="Nombre completo" required />
+    <input type="text" id="nombre" placeholder="Nombre completo" required />
     <input type="email" id="email" placeholder="Correo electrónico" required />
-    <input type="password" id="password" placeholder="Contraseña" required />
+    <input type="password" id="pass" placeholder="Contraseña" required />
     <button type="submit">Registrarse</button>
   </form>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <!-- INICIALIZACIÓN Y LÓGICA DE FIREBASE -->
+  <script type="module">
+    // 1. Importar módulos de Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  <script>
+    // 2. Tu configuración (debes copiarla desde Firebase Console)
     const firebaseConfig = {
       apiKey: "TU_API_KEY",
-      authDomain: "TU_DOMINIO.firebaseapp.com",
-      projectId: "fixdepot",
-      storageBucket: "fixdepot.appspot.com",
-      messagingSenderId: "XXXXXXX",
+      authDomain: "TU_PROYECTO.firebaseapp.com",
+      projectId: "TU_PROYECTO",
+      storageBucket: "TU_PROYECTO.appspot.com",
+      messagingSenderId: "XXXXXXXXXXXX",
       appId: "TU_APP_ID"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    // 3. Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    const auth = firebase.auth();
-
-    document.getElementById("registerForm").addEventListener("submit", function(e) {
+    // 4. Lógica de registro
+    document.getElementById("registerForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+      const nombre = document.getElementById("nombre").value;
       const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const pass = document.getElementById("pass").value;
 
-      auth.createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
-          window.location.href = "login.html";
-        })
-        .catch(error => {
-          alert("Error: " + error.message);
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, pass);
+        await setDoc(doc(db, "usuarios", cred.user.uid), {
+          nombre,
+          email,
+          creado: new Date()
         });
+        alert("Registro exitoso");
+        window.location.href = "login.html";
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
     });
   </script>
 </body>
