@@ -2,55 +2,46 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FixDepot - Registro</title>
   <style>
-    body { font-family: sans-serif; background-color: #fff; color: #d35400; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    form { border: 1px solid #d35400; padding: 2rem; background: #fff8f0; border-radius: 8px; }
-    input, button { margin: 1rem 0; padding: 0.5rem; width: 100%; }
-    .error { color: red; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff7e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+    }
+    button {
+      background-color: #ff8800;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <form id="registerForm">
-    <h2>Registro de Usuario</h2>
-    <input type="email" id="regEmail" placeholder="Correo electrónico" required />
-    <input type="password" id="regPassword" placeholder="Contraseña" required />
+  <form>
+    <h2>Crear Cuenta</h2>
+    <input type="text" placeholder="Nombre completo" required />
+    <input type="email" placeholder="Correo electrónico" required />
+    <input type="password" placeholder="Contraseña" required />
     <button type="submit">Registrarse</button>
-    <p class="error" id="regError"></p>
   </form>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_AUTH_DOMAIN",
-      projectId: "TU_PROJECT_ID",
-      storageBucket: "TU_STORAGE_BUCKET",
-      messagingSenderId: "TU_MESSAGING_ID",
-      appId: "TU_APP_ID"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    const form = document.getElementById("registerForm");
-    const errorMsg = document.getElementById("regError");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("regEmail").value;
-      const password = document.getElementById("regPassword").value;
-
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        window.location.href = "catalog.html";
-      } catch (error) {
-        errorMsg.textContent = "Error en el registro.";
-      }
-    });
-  </script>
 </body>
 </html>
