@@ -1,34 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
-<h1>¡Bienvenido a FixDepot!</h1>
-</p>Tu tienda confiable de materiales de construcción.</p>
-<a href="pages/login.html">Iniciar Sesión</a>
-<a href="pages/register.html">Registrarse</a>
-<style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FixDepot - Inicio</title>
+  <style>
     body {
-      font-family: sans-serif;
-      background-color: #fff;
-      color: #d35400;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #fff7e6;
+      color: #333;
+      margin: 0;
+      padding: 0;
     }
-    form {
-      border: 1px solid #d35400;
-      padding: 2rem;
-      border-radius: 8px;
-      background-color: #fff8f0;
+    header {
+      background-color: #ff8800;
+      padding: 20px;
+      text-align: center;
+      color: white;
     }
-    input, button {
-      display: block;
-      margin: 1rem 0;
-      padding: 0.5rem;
+    main {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    a.button {
+      background-color: #ff8800;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    a.button:hover {
+      background-color: #e67300;
+    }
+    footer {
+      background-color: #f2f2f2;
+      text-align: center;
+      padding: 15px;
+      position: fixed;
       width: 100%;
+      bottom: 0;
+      font-size: 0.9em;
     }
-    .error { color: red; }
   </style>
 </head>
 <body>
+  <header>
+    <h1>FixDepot</h1>
+    <p>Tu tienda confiable de materiales de construcción</p>
+  </header>
 
-  
+  <main>
+    <h1>¡Bienvenido a FixDepot!</h1>
+    <p>Encuentra todo lo que necesitas para tus proyectos de construcción, fácil y rápido.</p>
+    <a class="button" href="catalog.html">Explorar Catálogo</a>
+  </main>
+
+  <footer>
+    &copy; 2025 FixDepot - Todos los derechos reservados
+  </footer>
+</body>
+</html>
