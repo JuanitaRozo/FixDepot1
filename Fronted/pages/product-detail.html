@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle del Producto - FixDepot</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <main class="product-detail">
+    <div id="product"></div>
+    <div class="recommendations">
+      <h3>Recomendaciones</h3>
+      <div id="recommendation-list"></div>
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    fetch(`/api/products/${id}`)
+      .then(res => res.json())
+      .then(p => {
+        document.getElementById('product').innerHTML = `
+          <h2>${p.name}</h2>
+          <p>${p.description}</p>
+          <strong>Precio: $${p.price}</strong><br>
+          <button onclick="addToCart('${p._id}')">Agregar al carrito</button>
+        `;
+      });
+
+    fetch(`/api/products/${id}/recommendations`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('recommendation-list').innerHTML = data.map(p => `
+          <div>
+            <h4>${p.name}</h4>
+            <p>${p.price}</p>
+          </div>
+        `).join('');
+      });
+  </script>
+</body>
+</html>
