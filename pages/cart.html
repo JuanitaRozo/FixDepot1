@@ -1,39 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Carrito de Compras - FixDepot</title>
-  <link rel="stylesheet" href="styles/style.css" />
-  <script defer src="scripts/cart.js"></script>
+  <meta charset="UTF-8">
+  <title>Carrito de Compras</title>
 </head>
 <body>
-  <header>
-    <h1>Tu Carrito de Compras</h1>
-  </header>
-
-  <main>
-    <section id="cart-container">
-      <table id="cart-table">
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Subtotal</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Productos agregados aparecerán aquí -->
-        </tbody>
-      </table>
-
-      <div id="cart-summary">
-        <p>Total: <strong id="cart-total">$0.00</strong></p>
-        <button id="checkout-btn">Finalizar Compra</button>
-      </div>
-    </section>
-  </main>
+  <h2>Carrito de Compras</h2>
+  <ul id="cartItems">
+    <li>Cemento Portland - 2 unidades</li>
+    <li>Ladrillos Huecos - 10 unidades</li>
+  </ul>
+  <p>Total: $300</p>
+  <button>Proceder al pago</button>
 </body>
 </html>

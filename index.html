@@ -1,38 +1,55 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import RegisterUser from "./pages/RegisterUser";
-import RegisterWorker from "./pages/RegisterWorker";
-import RegisterProvider from "./pages/RegisterProvider";
-import ForgotPassword from "./pages/ForgotPassword";
-import Catalog from "./pages/Catalog";
-import ProductDetail from "./pages/ProductDetail";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import SalesReport from "./pages/SalesReport";
-import Navbar from "./components/Navbar";
-import "./App.css";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixDepot - Inicio</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <header>
+    <h1>FixDepot</h1>
+    <nav>
+      <a href="pages/login.html">Iniciar Sesión</a>
+      <a href="pages/register.html">Registrarse</a>
+      <a href="pages/catalog.html">Catálogo</a>
+      <a href="pages/cart.html">Carrito</a>
+    </nav>
+  </header>
 
-export default function App() {
-  return (
-    <Router>
-      <div className="bg-white text-orange-600 min-h-screen">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={Home} >
-          <Route path="/login" element={Login} >
-          <Route path="/register" element={RegisterUser}>
-          <Route path="/register-worker" element={RegisterWorker} >
-          <Route path="/register-provider" element={RegisterProvider}>
-          <Route path="/forgot-password" element={ForgotPassword}>
-          <Route path="/catalog" element={Catalog} >
-          <Route path="/product/:id" element={ProductDetail}>
-          <Route path="/cart" element={Cart} >
-          <Route path="/checkout" element={Checkout}>
-          <Route path="/sales-report" element={SalesReport} >
-        </Routes>
+  <main class="recommendations">
+    <h2>Recomendaciones</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="assets/cemento.jpg" alt="Cemento Portland">
+        <h3>Cemento Portland</h3>
+        <p>$60000 por bolsa</p>
+        <button onclick="addToCart('cemento')">Agregar al carrito</button>
       </div>
-    </Router>
-  );
-}
+      <div class="product-card">
+        <img src="assets/ladrillo.jpg" alt="Ladrillo Hueco">
+        <h3>Ladrillo Hueco</h3>
+        <p>$5000 por unidad</p>
+        <button onclick="addToCart('ladrillo')">Agregar al carrito</button>
+      </div>
+        <div class="product-card">
+            <img src="assets/arena.jpg" alt="Arena Gruesa">
+            <h3>Arena Gruesa</h3>
+            <p>$30000 por metro cúbico</p>
+            <button onclick="addToCart('arena')">Agregar al carrito</button>
+        </div>
+        <div class="product-card">
+            <img src="assets/pintura.jpg" alt="Grava">
+            <h3>pintura</h3>
+            <p>$25000 el litro</p>
+            <button onclick="addToCart('pintura')">Agregar al carrito</button>
+        </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 FixDepot. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="scripts/catalog.js"></script>
+</body>
+</html>

@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<main class="product-grid"></main>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo - FixDepot</title>
-  <link rel="stylesheet" href="styles/style.css">
+  <title>FixDepot - Catálogo</title>
+  <style>
+    body { font-family: sans-serif; background: #fff; color: #d35400; padding: 2rem; }
+    .producto { border: 1px solid #d35400; padding: 1rem; margin: 1rem 0; background: #fff8f0; }
+  </style>
 </head>
 <body>
-    
-  <section class="search-bar">
-    <input type="text" id="searchInput" placeholder="Buscar materiales...">
-  </section>
-
-  <main class="product-grid" id="catalogContainer">
-    <!-- Productos serán generados dinámicamente por catalog.js -->
-  </main>
-
-  <footer>
-    <p>&copy; 2025 FixDepot. Todos los derechos reservados.</p>
-  </footer>
-
-  <script src="scripts/catalog.js"></script>
+  <h1>Catálogo de Productos</h1>
+  <div class="producto">Cemento Portland - $50</div>
+  <div class="producto">Ladrillos Huecos - $25</div>
+  <div class="producto">Arena Fina - $30</div>
+  <!-- Aquí se cargarán dinámicamente productos desde Firebase si deseas -->
 </body>
 </html>
-</main>

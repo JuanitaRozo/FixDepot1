@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
-<main class="form-container">
-  <h2>Iniciar Sesión</h2>
-  <form>
-     <input type="text" placeholder="Nombre completo" required>
-    <input type="email" placeholder="Correo electrónico" required>
-    <input type="password" placeholder="Contraseña" required>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixDepot - Registro</title>
+  <style>
+    body { font-family: sans-serif; background-color: #fff; color: #d35400; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    form { border: 1px solid #d35400; padding: 2rem; background: #fff8f0; border-radius: 8px; }
+    input, button { margin: 1rem 0; padding: 0.5rem; width: 100%; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <form id="registerForm">
+    <h2>Registro de Usuario</h2>
+    <input type="email" id="regEmail" placeholder="Correo electrónico" required />
+    <input type="password" id="regPassword" placeholder="Contraseña" required />
     <button type="submit">Registrarse</button>
-    <p><a href="provider-register.html">¿Eres proveedor?</a> | <a href="worker-register.html">¿Eres trabajador?</a></p>
+    <p class="error" id="regError"></p>
   </form>
-</main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_AUTH_DOMAIN",
+      projectId: "TU_PROJECT_ID",
+      storageBucket: "TU_STORAGE_BUCKET",
+      messagingSenderId: "TU_MESSAGING_ID",
+      appId: "TU_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const form = document.getElementById("registerForm");
+    const errorMsg = document.getElementById("regError");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPassword").value;
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        window.location.href = "catalog.html";
+      } catch (error) {
+        errorMsg.textContent = "Error en el registro.";
+      }
+    });
+  </script>
+</body>
+</html>
