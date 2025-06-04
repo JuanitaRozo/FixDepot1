@@ -13,7 +13,49 @@
       <div id="recommendation-list"></div>
     </div>
   </main>
+<div class="comments">
+  <h3>Comentarios</h3>
+  <div id="comments"></div>
+  <form id="commentForm">
+    <textarea name="comment" required placeholder="Escribe tu opinión..."></textarea>
+    <select name="rating">
+      <option value="5">5 estrellas</option>
+      <option value="4">4 estrellas</option>
+      <option value="3">3 estrellas</option>
+      <option value="2">2 estrellas</option>
+      <option value="1">1 estrella</option>
+    </select>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
 
+<script>
+  fetch(`/api/products/${id}/comments`).then(r => r.json()).then(comments => {
+    document.getElementById('comments').innerHTML = comments.map(c => `
+      <p><strong>${c.userId.name}</strong>: ${c.comment} (${c.rating}/5)</p>
+    `).join('');
+  });
+
+  document.getElementById('commentForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const comment = e.target.comment.value;
+    const rating = e.target.rating.value;
+
+    const res = await fetch(`/api/products/${id}/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ comment, rating })
+    });
+
+    if (res.ok) location.reload();
+    else alert('Error al enviar comentario');
+  });
+  
+</script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -39,6 +81,8 @@
           </div>
         `).join('');
       });
+
+      
   </script>
 </body>
 </html>
